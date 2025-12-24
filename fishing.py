@@ -29,13 +29,7 @@ def main():
             img = ImageGrab.grab(box_area)
             img.save('image/test.png')
             img_test = cv2.imread('image/test.png')
-            if max([hist_score(img_test, x) for x in img_arrow]) > 0.9:
-                print('arrow state')
-                auto.moveTo(400, 980)
-                auto.click()
-                auto.dragTo(20, 0, duration=0.3, button='left')
-                sleep(0.2)
-            elif hist_score(img_test, img_fishing) > 0.8:
+            if hist_score(img_test, img_fishing) > 0.8:
                 print('fishing state')
                 auto.moveTo(810, 980)
                 auto.click()
@@ -46,6 +40,12 @@ def main():
                 print('ready state')
             elif hist_score(img_test, img_space) > 0.8:
                 print('space state')
+            elif max([hist_score(img_test, x) for x in img_arrow]) > 0.9:
+                print('arrow state')
+                auto.moveTo(400, 980)
+                auto.click()
+                auto.dragTo(20, 0, duration=0.3, button='left')
+                sleep(0.2)
             else:
                 print('unknown')
             sleep(0.02)
